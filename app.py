@@ -10,8 +10,8 @@ from scrape_nfl import nfl_dict
 
 # DEFINE SESSION AND ENGINE ---------
 
-#conn = "mongodb+srv://atlasAdmin:laboY!1002@cluster0.mbgog.mongodb.net/<dbname>?retryWrites=true&w=majority"
-conn = "mongodb://localhost:27017"
+conn = "mongodb+srv://atlasAdmin:laboY!1002@cluster0.mbgog.mongodb.net/<dbname>?retryWrites=true&w=majority"
+#conn = "mongodb://localhost:27017"
 client = pymongo.MongoClient(conn)
 db = client.nfl_db
 db.teams.drop()
@@ -38,8 +38,8 @@ def home():
 
 @app.route("/api/v1.0/teams")
 def api_teams():
-    #conn = "mongodb+srv://atlasAdmin:laboY!1002@cluster0.mbgog.mongodb.net/<dbname>?retryWrites=true&w=majority"
-    conn = "mongodb://localhost:27017"
+    conn = "mongodb+srv://atlasAdmin:laboY!1002@cluster0.mbgog.mongodb.net/<dbname>?retryWrites=true&w=majority"
+    #conn = "mongodb://localhost:27017"
     client = pymongo.MongoClient(conn)
     db = client.nfl_db
     for i in db.teams.find():

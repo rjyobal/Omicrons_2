@@ -33,7 +33,6 @@ function fillDropdown(){
  */
 function optionChanged(selectedTeam){
     console.log(`Selected Team: ${selectedTeam}`)
-    plotdata(selectedTeam);
     d3.json(jsonData).then((data) => {
         let teams = data.data[0];
         //Display image
@@ -42,6 +41,7 @@ function optionChanged(selectedTeam){
             if(selectedTeam==teams[x].FullName){
                 //console.log(teams[x].Logo)
                 d3.select('#logo').attr('src',teams[x].WikipediaLogoUrl)
+                plotdata(selectedTeam,teams[x].PrimaryColor);
             }
         }
     });
@@ -51,20 +51,21 @@ function optionChanged(selectedTeam){
  * Plot data based on 
  * @param {string} selectedTeam Team selected in dropdown
  */
-function plotdata(selectedTeam){
+function plotdata(selectedTeam, PrimaryColor){
     d3.json(jsonPlotData).then((data) => {
         let teamsstats = data;
         for(x in teamsstats){
             if(selectedTeam==teamsstats[x].FullName){
                 let x_values = ['Passing Yds Per Game','Passing Yds','Rushing Yards Per Game','Rush Yds','Total Yds','Yard Per Game']
                 let y_values = [teamsstats[x].PYdsG,teamsstats[x].PassYds,teamsstats[x].RYdsG,teamsstats[x].RushYds,teamsstats[x].TotYds,teamsstats[x].YdsG]
-                //let y_values = [15,12,34,12,42,12]
+                //console.log(PrimaryColor);
                 let data = [
                     {
                       x: x_values,
                       y: y_values,
                       type: 'bar',
-                      marker:{color: ['#4472C4','#ED7D31','#A5A5A5','#FFC000','#5B9BD5','#70AD47']}
+                      marker:{color: PrimaryColor}
+                      //marker:{color: ['#4472C4','#ED7D31','#A5A5A5','#FFC000','#5B9BD5','#70AD47']}
                     }
                   ];
                 let layout = {

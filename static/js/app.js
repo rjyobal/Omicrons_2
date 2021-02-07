@@ -58,17 +58,37 @@ function plotdata(selectedTeam){
             if(selectedTeam==teamsstats[x].FullName){
                 let x_values = ['Passing Yds Per Game','Passing Yds','Rushing Yards Per Game','Rush Yds','Total Yds','Yard Per Game']
                 let y_values = [teamsstats[x].PYdsG,teamsstats[x].PassYds,teamsstats[x].RYdsG,teamsstats[x].RushYds,teamsstats[x].TotYds,teamsstats[x].YdsG]
-                let views_data = [
+                //let y_values = [15,12,34,12,42,12]
+                let data = [
                     {
                       x: x_values,
                       y: y_values,
-                      type: 'bar'
+                      type: 'bar',
+                      marker:{color: ['#4472C4','#ED7D31','#A5A5A5','#FFC000','#5B9BD5','#70AD47']}
                     }
                   ];
                 let layout = {
-                    yaxis: {range: [0, 7000]}
+                    yaxis: {range: [0, 7000]},
+                    title: {
+                        text:'2020 NFL Team Offense Statistics',
+                        font: {size: 24}
+                    },
+                    images: [
+                        {
+                          "source": "https://upload.wikimedia.org/wikipedia/commons/2/2d/American_football_icon_simple_flat.svg",
+                          "xref": "x",
+                          "yref": "y",
+                          "x": 0, //Start on x from chart
+                          "y": 7000, //Start on y from chart
+                          "sizex": 0.8,
+                          "sizey": 2000, //Size based on the y scale
+                          "sizing": "stretch",
+                          "opacity": 0.5,
+                          "layer": "below"
+                        }
+                      ]
                 };
-                Plotly.newPlot('plot', views_data, layout);
+                Plotly.newPlot('plot', data, layout);
             }
         }
     });

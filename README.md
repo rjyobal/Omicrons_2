@@ -1,2 +1,2 @@
-# Omicrons_2
-Omicrons_2
+# Omicrons
+Project Work

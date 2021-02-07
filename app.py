@@ -7,10 +7,11 @@ import json
 from flask import Flask, jsonify, render_template
 import pymongo
 from scrape_nfl import nfl_dict
+import os
 
 # DEFINE SESSION AND ENGINE ---------
 
-conn = "mongodb+srv://omicron:omicron@cluster0.mbgog.mongodb.net/"
+conn = os.environ.get('DATABASE_URL','')
 #conn = "mongodb://localhost:27017"
 client = pymongo.MongoClient(conn)
 db = client.nfl_db
@@ -38,7 +39,7 @@ def home():
 
 @app.route("/api/v1.0/teams")
 def api_teams():
-    conn = "mongodb+srv://omicron:omicron@cluster0.mbgog.mongodb.net/"
+    conn = os.environ.get('DATABASE_URL','')
     #conn = "mongodb://localhost:27017"
     client = pymongo.MongoClient(conn)
     db = client.nfl_db
